@@ -90,7 +90,17 @@ def build_model():
     
     return pipeline
 
-
+def overal_accuracy(y_true, y_pred):
+    """
+    Display the accuracy of the test set
+    
+    input - y_true: y_test
+            y_pred: predict with X_test
+    """
+    accuracy = ((y_true - y_pred) == 0).sum().sum() / (y_true.shape[0] * y_true.shape[1])
+    print("The accuracy of the test set is: {}".format(accuracy))
+    
+    
 def evaluate_model(model, X_test, Y_test, category_names):
     """
     Display the classification report for the given model
@@ -132,9 +142,11 @@ def main():
 
         print('Trained model saved!')
         
+        print('Pridicting test set...')
+        y_pred = model.predict(X_test)
+        
         print('Evaluating model...')
-        evaluate_model(model, X_test, Y_test, category_names)
-
+        overal_accuracy(Y_test, y_pred)
 
 
     else:
