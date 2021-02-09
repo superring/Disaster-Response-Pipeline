@@ -82,12 +82,8 @@ def build_model():
     
     ## Find the optimal model using GridSearchCV
     parameters = {
-        'vect__ngram_range': ((1, 1), (1, 2)),
         'vect__max_df': (0.5, 0.75),
-        'tfidf__use_idf': (True, False),
         'mul__estimator__n_estimators': [50, 100],
-        'mul__estimator__min_samples_split': [2, 4],
-
     }
 
     pipeline = GridSearchCV(pipeline, param_grid=parameters)
@@ -131,13 +127,15 @@ def main():
         print('Training model...')
         model.fit(X_train, Y_train)
         
-        print('Evaluating model...')
-        evaluate_model(model, X_test, Y_test, category_names)
-
         print('Saving model...\n    MODEL: {}'.format(model_filepath))
         save_model(model, model_filepath)
 
         print('Trained model saved!')
+        
+        print('Evaluating model...')
+        evaluate_model(model, X_test, Y_test, category_names)
+
+
 
     else:
         print('Please provide the filepath of the disaster messages database '\
