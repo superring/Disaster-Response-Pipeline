@@ -86,7 +86,7 @@ def build_model():
         'mul__estimator__n_estimators': [50, 100],
     }
 
-    pipeline = GridSearchCV(pipeline, param_grid=parameters)
+    pipeline = GridSearchCV(pipeline, param_grid=parameters, verbose=5, cv=2, n_jobs=2)
     
     return pipeline
 
