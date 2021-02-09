@@ -9,7 +9,8 @@ We merge the dataset in the `data` folder (`disaster_messages.csv` and `disaster
 
 ### 2. Training Model
 Using scikit-learn, then we train the classifier to be able to get a model which can classify a message, save the model in the `models` folder with the name `classifier.pkl`.
-Note: You can build your own model by executing `train_classifier.py`, or you can use the pre-trained model downloaded from [here](https://1drv.ms/b/s!AnFaAJmVbYO2h9w0eafpwjRTnoIqwA?e=zPaxmw).
+Note: You can build your own model by executing `train_classifier.py`, however it takes a very long time to do so since GridSearchCV is used for optimized hyper parameters. So it's suggested that you use the pre-trained model downloaded from [here](https://1drv.ms/b/s!AnFaAJmVbYO2h9w0eafpwjRTnoIqwA?e=zPaxmw).
+
 Remember to put the downloaded classifier.pkl in the model folder.
 
 ### 3. Run the Web App
