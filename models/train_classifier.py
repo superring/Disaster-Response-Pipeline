@@ -86,7 +86,7 @@ def build_model():
         'mul__estimator__n_estimators': [50, 100],
     }
 
-    pipeline = GridSearchCV(pipeline, param_grid=parameters, verbose=5, cv=2, n_jobs=2)
+    pipeline = GridSearchCV(pipeline, param_grid=parameters, verbose=5, cv=2)
     
     return pipeline
 
@@ -101,19 +101,21 @@ def overal_accuracy(y_true, y_pred):
     print("The accuracy of the test set is: {}".format(accuracy))
     
     
-def evaluate_model(model, X_test, Y_test, category_names):
+def evaluate_model(Y_test, Y_pred, category_names):
     """
     Display the classification report for the given model
     
     input - model: the machine learning model
-            X_test: X test set
-            Y_test: Y test set
+            Y_test: X test set
+            Y_pred: Y test set
             category_names: names of the categories
     """
 
     # Predict the given X_test and create the report based on the Y_pred
-    Y_pred = model.predict(X_test)
-    print(classification_report(Y_test, Y_pred, target_names=category_names))
+    for i, y in enumerate(category_names):
+        print(category_names[i])
+        print(classification_report(np.array(Y_test)[i], Y_pred[i]))
+        print()
 
 
 def save_model(model, model_filepath):
@@ -143,10 +145,10 @@ def main():
         print('Trained model saved!')
         
         print('Pridicting test set...')
-        y_pred = model.predict(X_test)
+        Y_pred = model.predict(X_test)
         
         print('Evaluating model...')
-        overal_accuracy(Y_test, y_pred)
+        evaluate_model(Y_test, Y_pred, category_names)
 
 
     else:
